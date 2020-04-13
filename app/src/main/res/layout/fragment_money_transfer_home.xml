@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#33808080"
+    tools:context=".MoneyTransferHomeFragment">
+    <include
+        layout="@layout/header"
+        android:id="@+id/header"/>
+    <TextView
+        android:layout_below="@+id/header"
+        android:id="@+id/transfer_money"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:layout_margin="30dp"
+        android:text="@string/transfer_money" />
+
+    <LinearLayout
+        android:padding="16dp"
+        android:layout_below="@+id/transfer_money"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:padding="10dp"
+            android:id="@+id/qr_scanner_root"
+            android:src="@drawable/icn_qr_code"
+            android:background="@drawable/button_round_edges"
+            android:scaleType="centerInside"
+            android:layout_width="90dp"
+            android:layout_height="90dp"/>
+        <TextView
+            android:layout_marginTop="16dp"
+            android:text="QR Scan"
+            android:textSize="18sp"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Virtual Wallet BOS</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="gst_on_service_charge">Gst on Service Charge</string>
+    <string name="service_charge_txt">Service Charge</string>
+    <string name="total_amount_txt">Total Amount</string>
+    <string name="wallet_balance_text">Wallet Balance :</string>
+    <string name="try_again">Try Again</string>
+    <string name="recharge_amount_txt">Recharge Amount</string>
+    <string name="transfer_money">Transfer money</string>
+    <string name="hello">Hello</string>
+    <string name="balance">"Current Balance: "</string>
+    <string name="rs">/-</string>
+    <string name="proceed_to_pay">proceed to pay</string>
+    <string name="paying_to">Paying to:  %1$s</string>
+    <string name="paying_to_rs">Paying %1$s to %2$s</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password</string>
+
+    <!--    Login Screen Strings  -->
+    <string name="mobile_number_hint">Mobile Number</string>
+    <string name="password_hint">Password</string>
+    <string name="login_text">Login</string>
+    <string name="forgot_password_text">Forgot Password?</string>
+    <string name="don_t_have_an_account">Don\'t Have an Account?</string>
+    <string name="Register">Register</string>
+    <string name="invalid_password_alert">Please enter valid password.</string>
+    
+</resources>

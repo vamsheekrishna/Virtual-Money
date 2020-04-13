@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.authentication.AuthenticationActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/login_stuff"
+        android:layout_centerInParent="true"
+        android:layout_margin="40dp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Mobile number"
+            app:hintTextColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/user_name"
+                style="@style/TextAppearance.AppCompat"
+                android:textColorHint="@color/gray"
+                android:text=""
+                android:drawableLeft="@drawable/user_login"
+                android:drawablePadding="16dp"
+                android:textSize="20sp"
+                android:maxLength="10"
+                android:digits="0123456789"
+                android:inputType="phone"
+                android:background="@null"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/darker_gray"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/password_hint"
+            app:hintTextColor="@color/colorPrimary"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            android:textColorHint="@color/gray"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/password"
+                android:inputType="textPassword"
+                android:textColorHint="@color/gray"
+                android:drawableLeft="@drawable/password"
+                android:drawablePadding="16dp"
+                android:text=""
+                android:textSize="20sp"
+                android:background="@null"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_button"
+        android:text="@string/login"
+        android:layout_below="@id/login_stuff"
+        style="@style/submit_button"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/forgot_pwd"
+        android:text="@string/forgot_password"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/login_button"
+        android:layout_marginTop="26dp"
+        android:textSize="18sp"/>
+
+</RelativeLayout>

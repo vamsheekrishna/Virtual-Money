@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_bg"
+    tools:context=".EnterAmountFragment">
+
+    <include layout="@layout/header"
+        android:id="@+id/header"/>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_above="@+id/next"
+        android:layout_below="@+id/header"
+        android:orientation="vertical"
+        android:id="@+id/enter_money_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:background="@drawable/button_round_edges"
+                android:padding="20dp"
+                android:src="@drawable/wallet"
+                android:layout_width="80dp"
+                android:layout_height="80dp"/>
+            <TextView
+                android:layout_margin="16dp"
+                android:text=">"
+                android:textSize="42sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:background="@drawable/button_round_edges"
+                android:padding="20dp"
+                android:src="@drawable/user"
+                android:layout_width="80dp"
+                android:layout_height="80dp"/>
+        </LinearLayout>
+        <TextView
+            android:layout_margin="16sp"
+            android:id="@+id/pay_to"
+            android:textSize="22sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/paying_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/amount"
+            style="@style/edit_text"
+            android:drawableLeft="@drawable/rs"
+            android:drawablePadding="4dp"
+            android:maxLength="5"
+            android:inputType="number"/>
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginBottom="16dp"
+        android:id="@+id/next"
+        android:text="@string/proceed_to_pay"
+        android:layout_alignParentBottom="true"
+        style="@style/submit_button"/>
+</RelativeLayout>
