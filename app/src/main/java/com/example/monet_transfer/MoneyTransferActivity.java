@@ -1,5 +1,7 @@
 package com.example.monet_transfer;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,9 +14,11 @@ public class MoneyTransferActivity extends BaseActivity implements OnMoneyTransf
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.base_layour);
-
-        addFragment(MoneyTransferHomeFragment.newInstance("", ""), "",false);
+        if (savedInstanceState == null) {
+            addFragment(MoneyTransferHomeFragment.newInstance("", ""), "MoneyTransferHomeFragment", false);
+        }
     }
 
     @Override
@@ -39,18 +43,24 @@ public class MoneyTransferActivity extends BaseActivity implements OnMoneyTransf
     }
 
     @Override
-    public void goToEnterPassCode(Long amount, String scannedID) {
-        replaceFragment(ConformPinFragment.newInstance(amount, scannedID), "ConformPinFragment", true);
+    public void goToEnterPassCode(String id, int transferRefNumber, String transferAmount, String receiverCardID) {
+        replaceFragment(ConformPinFragment.newInstance(id, transferRefNumber, transferAmount,receiverCardID), "ConformPinFragment", true);
+    }
+
+    @Override
+    public void generateQRCode() {
+        startActivity(new Intent(getApplicationContext(), AmulCard.class));
+        //replaceFragment(GenerateVirtualCard.newInstance("", ""), "GenerateVirtualCard", true);
     }
 
     @Override
     public void showDialog() {
-//        FragmentTransaction ft = Objects.requireNonNull(getSupportFragmentManager().beginTransaction());
-//        Fragment prev = Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag("custom_dialog"));
-//        if (prev != null) {
-//            ft.remove(prev);
-//        }
-//        ft.addToBackStack(null);
+        //        FragmentTransaction ft = Objects.requireNonNull(getSupportFragmentManager().beginTransaction());
+        //        Fragment prev = Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag("custom_dialog"));
+        //        if (prev != null) {
+        //            ft.remove(prev);
+        //        }
+        //        ft.addToBackStack(null);
 
         DialogFragment dialogFragment = DialogFragment.newInstance(false, "");
         dialogFragment.setCancelable(false);

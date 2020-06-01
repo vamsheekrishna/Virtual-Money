@@ -4,6 +4,7 @@ public interface OnMoneyTransferListener {
     void goToTransferMoneyHome();
     void goToQRScanner();
     void goToEnterMoney(String scannedID);
-    void goToEnterPassCode(Long amount, String mScannedID);
+    void goToEnterPassCode(String id, int transferRefNumber, String transferAmount, String receiverCardID);
+    void generateQRCode();
     void showDialog();
 }

@@ -1,0 +1,124 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.monet_transfer.GenerateVirtualCard"
+    android:orientation="vertical"
+    android:layout_margin="16dp"
+    android:weightSum="5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="@drawable/card_bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_marginStart="16dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ebix_cash"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_marginEnd="16dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/amul"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:background="@drawable/card_qr_code"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+        <ImageView
+            android:layout_marginStart="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/qr_code_text"
+            android:id="@+id/qr_code"
+            android:layout_width="300dp"
+            android:layout_height="300dp" />
+        <ImageView
+            android:src="@drawable/amul_card_right_img"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@+id/qr_code_text"
+            android:layout_margin="32dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp" />
+
+        <TextView
+            android:layout_margin="4dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/qr_code_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="001 002 003"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_margin="4dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/qr_code_text"
+            android:id="@+id/qr_code_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="001 002 003"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic" />
+
+
+        <TextView
+            android:layout_margin="4dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Expiry: 12/2020"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic" />
+        <!--<TextView
+            android:id="@+id/exp_text"
+            android:layout_margin="4dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/qr_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="MM/YYYY"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic" />-->
+    </RelativeLayout>
+</LinearLayout>
+    <!--    <ImageView-->
+    <!--        android:id="@+id/amul_bg"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:src="@drawable/smart_card"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/qr_code"-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:layout_marginStart="32dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.53" />-->
+
+

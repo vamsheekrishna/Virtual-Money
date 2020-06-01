@@ -4,11 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-
 import android.os.Vibrator;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -16,8 +11,10 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 
 import com.example.baseclasses.BaseFragment;
 import com.google.android.gms.vision.CameraSource;
@@ -156,13 +153,14 @@ public class QRScannerFragment extends BaseFragment {
                     final Barcode thisCode = barcodes.valueAt(0);
                     if(thisCode.rawValue.contains("virtual_") && !isSuccess) {
                         // cameraSource.stop();
-                        detector.release();
-                        isSuccess = true;
+                        //detector.release();
+                        //isSuccess = true;
+
                         Vibrator vibrator = (Vibrator) getContext().getSystemService(VIBRATOR_SERVICE);
                         assert vibrator != null;
                         vibrator.vibrate(new long[]{0, 200, 300,400} , -1);
                         mListener.goToEnterMoney(thisCode.rawValue);
-                        // Toast.makeText(getContext(),"Scanned code: "+thisCode.rawValue, Toast.LENGTH_LONG).show();
+
                     }
 //                    textView.post(new Runnable() {
 //                        @Override

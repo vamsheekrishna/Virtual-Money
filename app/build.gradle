@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.samplebarcodeapp"
         minSdkVersion 21
@@ -11,11 +11,31 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    flavorDimensions "local"
+    productFlavors {
+
+        staging {
+            dimension "local"
+            buildConfigField("String", "BASE_URL", '"http://180.92.175.134/outlet/api/"')
+            buildConfigField("String", "WALLET_BALANCE", '"Wallet/walletBalance"')
+            buildConfigField("String", "TRANSFER_VERIFICATION", '"Transfer/transferVerification"')
+            buildConfigField("String", "TRANSFER_REQUEST", '"Transfer/transferRequest"')
+            buildConfigField("String", "LOGIN", '"Users/login"')
+        }
+        production {
+            dimension "local"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -30,4 +50,13 @@ dependencies {
     implementation 'com.google.android.gms:play-services-vision:20.0.0'
 
     implementation 'com.google.android.material:material:1.1.0'
+
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+
 }

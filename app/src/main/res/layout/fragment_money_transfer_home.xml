@@ -21,26 +21,58 @@
         android:text="@string/transfer_money" />
 
     <LinearLayout
+        android:orientation="horizontal"
         android:padding="16dp"
         android:layout_below="@+id/transfer_money"
-        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <ImageButton
-            android:padding="10dp"
-            android:id="@+id/qr_scanner_root"
-            android:src="@drawable/icn_qr_code"
-            android:background="@drawable/button_round_edges"
-            android:scaleType="centerInside"
-            android:layout_width="90dp"
-            android:layout_height="90dp"/>
-        <TextView
-            android:layout_marginTop="16dp"
-            android:text="QR Scan"
-            android:textSize="18sp"
-            android:textColor="@color/colorAccent"
-            android:layout_gravity="center"
+        <LinearLayout
+            android:layout_margin="8dp"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:padding="10dp"
+                android:id="@+id/qr_scanner_root"
+                android:src="@drawable/icn_qr_code"
+                android:background="@drawable/button_round_edges"
+                android:scaleType="centerInside"
+                android:layout_width="90dp"
+                android:layout_height="90dp"/>
+            <TextView
+                android:layout_marginTop="16dp"
+                android:text="QR Scan"
+                android:textSize="18sp"
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:padding="20dp"
+                android:id="@+id/qr_generator"
+                android:src="@drawable/qr_code"
+                android:background="@drawable/button_round_edges"
+                android:scaleType="centerInside"
+                android:layout_width="90dp"
+                android:layout_height="90dp"/>
+            <TextView
+                android:layout_marginTop="16dp"
+                android:text="Show Card"
+                android:textSize="18sp"
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>

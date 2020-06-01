@@ -2,8 +2,7 @@ package com.example.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.baseclasses.BaseActivity;
 import com.example.baseclasses.BaseFragment;
-import com.example.baseclasses.UserData;
 import com.example.monet_transfer.MoneyTransferActivity;
 import com.example.monet_transfer.R;
+import com.example.server.RetrofitInstance;
+import com.example.server.api.interfaces.Login;
+import com.example.server.api.pojo.POJOLogin;
 
-import java.util.Objects;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginFragment extends BaseFragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
@@ -72,16 +79,44 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         String password = textPassword.getText().toString();
 
         if(userID.length() <10) {
-            Toast.makeText(getActivity(), "Please enter valid user id.", Toast.LENGTH_LONG).show();
-        } else if (password.length() < 4) {
-            Toast.makeText(getActivity(), "Please enter valid password.", Toast.LENGTH_LONG).show();
-        } else if (userID.equals(UserData.getInstance().getMobileNumber((BaseActivity) Objects.requireNonNull(getActivity()))) &&
-                password.equals(UserData.getInstance().getPassword((BaseActivity) Objects.requireNonNull(getActivity())))) {
-            getActivity().finish();
-            Intent intent = new Intent(getActivity(), MoneyTransferActivity.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(getActivity(), "Incorrect user id or password.", Toast.LENGTH_LONG).show();
+            showDialog("","Please enter valid user id.");
+        } else if (password.length() < 2) {
+            showDialog("","Please enter valid password.");
+        }else {
+            Login loginAPI = RetrofitInstance.getInstance().create(Login.class);
+            Call<POJOLogin> response = loginAPI.login(userID, password);
+            response.enqueue(new Callback<POJOLogin>() {
+                @Override
+                public void onResponse(Call<POJOLogin> call, Response<POJOLogin> response) {
+                    if(response.isSuccessful()) {
+                        POJOLogin.User user = response.body().getUser();
+                        User.getInstance().setUserID(user.getUserID());
+                        User.getInstance().setFullName(user.getFullName());
+                        User.getInstance().setAccountNumber(user.getAccountNO());
+                        User.getInstance().setToken(user.getToken());
+                        getActivity().finish();
+                        Intent intent = new Intent(getActivity(), MoneyTransferActivity.class);
+                        startActivity(intent);
+                    } else {
+                        try {
+                            JSONObject jObjError = new JSONObject(response.errorBody().string());
+                            showDialog("",jObjError.getString("message"));
+                        } catch (Exception e) {
+                            showDialog("",e.getMessage());
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<POJOLogin> call, Throwable t) {
+                    Log.d("onFailure", "onFailure"+t.getMessage());
+                }
+            });
         }
+        /* else if (userID.equals(UserData.getInstance().getMobileNumber((BaseActivity) Objects.requireNonNull(getActivity()))) &&
+                password.equals(UserData.getInstance().getPassword((BaseActivity) Objects.requireNonNull(getActivity())))) {
+
+
+        }*/
     }
 }

@@ -16,9 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.baseclasses.BaseActivity;
+import com.example.authentication.User;
 import com.example.baseclasses.BaseFragment;
-import com.example.baseclasses.UserData;
+import com.example.server.RetrofitInstance;
+import com.example.server.api.interfaces.Login;
+import com.example.server.api.pojo.POJOWalletBalance;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MoneyTransferHomeFragment extends BaseFragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
@@ -65,33 +71,63 @@ public class MoneyTransferHomeFragment extends BaseFragment implements View.OnCl
         // Inflate the layout for this fragment
         if (ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-
             if (ActivityCompat.shouldShowRequestPermissionRationale((Activity)
                     getContext(), Manifest.permission.CAMERA)) {
-
-
             } else {
                 ActivityCompat.requestPermissions((Activity) getContext(),
                         new String[]{Manifest.permission.CAMERA},
                         MY_PERMISSIONS_REQUEST_CAMERA);
             }
-
         }
-
         return inflater.inflate(R.layout.fragment_money_transfer_home, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((TextView)view.findViewById(R.id.name)).setText(UserData.getInstance().getFirstName((BaseActivity) getActivity()));
-        ((TextView)view.findViewById(R.id.balance)).setText(UserData.getInstance().getBalance((BaseActivity) getActivity()));
-        view.findViewById(R.id.qr_scanner_root).setOnClickListener(this);
+        TextView name = view.findViewById(R.id.name);
 
+        TextView balance = view.findViewById(R.id.balance);
+        view.findViewById(R.id.qr_scanner_root).setOnClickListener(this);
+        view.findViewById(R.id.qr_generator).setOnClickListener(this);
+
+        Login loginAPI = RetrofitInstance.getInstance().create(Login.class);
+        Call<POJOWalletBalance> balanceAPI = loginAPI.walletBalance(User.getInstance().getToken(), User.getInstance().getAccountNO() ,User.getInstance().getUserID());
+        balanceAPI.enqueue(new Callback<POJOWalletBalance>() {
+            @Override
+            public void onResponse(Call<POJOWalletBalance> call, Response<POJOWalletBalance> response) {
+                try {
+                    if(response.isSuccessful()) {
+                        POJOWalletBalance.Data data = response.body().getData();
+                        User.getInstance().setAccountNumber(data.getAccountNumber());
+                        User.getInstance().setWalletID(data.getWalletID());
+                        User.getInstance().setAmount(data.getAmount());
+                        User.getInstance().setDisplayName(data.getDisplayName());
+                        name.setText(User.getInstance().getFullName());
+                        balance.setText(data.getAmount());
+                    }
+                }catch (Exception e) {
+                    showDialog("", e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<POJOWalletBalance> call, Throwable t) {
+                showDialog("", t.getMessage());
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
-        mListener.goToQRScanner();
+        switch (view.getId()) {
+            case R.id.qr_scanner_root:
+                mListener.goToQRScanner();
+                break;
+            case R.id.qr_generator:
+                mListener.generateQRCode();
+                break;
+        }
+
     }
 }
